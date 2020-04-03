@@ -1,0 +1,41 @@
+section.section
+	@media screen and (max-width: 600px)
+		padding-right: 10px
+		padding-left: 10px
+	.container
+		.content
+			.container-content-title
+				font-size: 5vmin
+		.articles
+			max-width: 1344px
+			margin: 0 auto
+			display: flex
+			flex-wrap: wrap
+			justify-content: space-between
+			.content
+				width: 33%
+				display: flex
+				justify-content: center
+				align-items: baseline
+				.article:hover
+					background-color: #e8e8e8
+				.article
+					width: 98%
+					display: block
+					border: 1px solid #eaecee
+					transition: background-color 0.8s ease-out
+					box-shadow: 5px 5px 5px #333
+					@media screen and (max-width: 600px)
+						box-shadow: none
+					figure
+						margin: 0
+					.article-text
+						padding: 2vmin 5vmin
+						.article-text-title
+							font-size: 3vmin
+							color: #333
+						.article-text-date
+							font-size: 2vmin
+							text-align: right
+							color: #333
+

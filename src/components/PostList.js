@@ -1,49 +1,45 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link, graphql } from 'gatsby'
+import './PostList.sass'
 
 export default class IndexPage extends React.Component {
   render() {
     const { posts, title } = this.props
 
     return (
-      <section className="section">
-        <div className="container">
-          <div className="content">
-            <h1 className="has-text-weight-bold is-size-2">{title}</h1>
-          </div>
-          {posts.map(({ node: post }) => (
-            <div
-              className="content"
-              style={{ border: '1px solid #eaecee', padding: '2em 4em' }}
-              key={post.id}
-            >
-              <p>
-                <Link className="has-text-primary" to={post.slug}>
-                  {post.title}
-                </Link>
-                <span> &bull; </span>
-                <small>
-                  {post.date} - posted by{' '}
-                  <Link to={`/author/${post.author.slug}`}>
-                    {post.author.name}
-                  </Link>
-                </small>
-              </p>
-              <div>
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: post.excerpt.replace(/<p class="link-more.*/, ''),
-                  }}
-                />
-                <Link className="button is-small" to={post.slug}>
-                  Keep Reading →
-                </Link>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
+			<>
+				<figure>
+					<img src="https://hello-japanese.net/wp-content/uploads/2018/10/HelloJapanese2.jpg" alt="image"/>
+				</figure>
+				<section className="section">
+					<div className="container">
+						<div className="content">
+							<h2 className="container-content-title">{title}</h2>
+						</div>
+						<div className="articles">
+							{posts.map(({ node: post }) => (
+								<div
+									className="content"
+									key={post.id}
+								>
+									<Link className="article" to={post.slug}>
+										<figure>
+											<img src="https://hello-japanese.net/wp-content/uploads/2018/10/HelloJapanese2.jpg" alt="image"/>
+										</figure>
+										<div className="article-text">
+											<h3 className="article-text-title">{post.title}</h3>
+											<p className="article-text-date">
+												{post.date}
+											</p>
+										</div>
+									</Link>
+								</div>
+							))}
+						</div>
+					</div>
+				</section>
+			</>
     )
   }
 }

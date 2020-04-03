@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link, StaticQuery, graphql } from 'gatsby'
-import github from '../img/github-icon.svg'
-import logo from '../img/logo.svg'
+import './Navbar.sass'
 
 const Navbar = () => (
   <StaticQuery
