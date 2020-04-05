@@ -10,7 +10,8 @@ export default class IndexPage extends React.Component {
     return (
 			<>
 				<figure>
-					<img src="https://hello-japanese.net/wp-content/uploads/2018/10/HelloJapanese2.jpg" alt="image"/>
+					<img className="img-pc" src="https://hello-japanese.net/wp-content/uploads/2018/10/HelloJapanese2.jpg" alt="image"/>
+					<img className="img-sp" src="https://hello-japanese.net/wp-content/themes/hello-japanese-sp/img/HelloJapanese2_sp.jpg" alt="image"/>
 				</figure>
 				<section className="section">
 					<div className="container">
