@@ -50,7 +50,8 @@ export const pageQuery = graphql`
   query PageById($id: String!) {
     wordpressPage(id: { eq: $id }) {
       title
-      content
+			content
+			slug
     }
   }
 `

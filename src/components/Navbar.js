@@ -2,6 +2,9 @@ import React from 'react'
 import { Link, StaticQuery, graphql } from 'gatsby'
 import './Navbar.sass'
 
+const showFirstLetterUpperCase = (str) => {
+	return str.charAt(0).toUpperCase() + str.slice(1)
+}
 const Navbar = () => (
   <StaticQuery
     query={graphql`
@@ -20,19 +23,19 @@ const Navbar = () => (
 			<header className="header">
 				<nav className="head-navbar navbar">
 					<div className="container">
-						<div className="navbar-brand">
-							<Link to="/" className="navbar-item">
+						<div className="container-item">
+							<Link to="/" className="container-item-title">
 								<h1>Hello Japanese</h1>
 							</Link>
 						</div>
-						<div className="navbar-end">
+						<div className="container-item">
 							{data.allWordpressPage.edges.map(edge => (
 								<Link
-									className="navbar-item"
+									className="container-item-pages"
 									to={edge.node.slug}
 									key={edge.node.slug}
 								>
-									{edge.node.title}
+									{showFirstLetterUpperCase(edge.node.slug)}
 								</Link>
 							))}
 						</div>
