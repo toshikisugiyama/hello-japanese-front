@@ -2,32 +2,41 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 import Layout from '../components/Layout'
+import './page.sass'
 
-export const PageTemplate = ({ title, content }) => {
+export const PageTemplate = ({ title, content, date, thumbnail }) => {
+	const returnSpThumbnail = (url) => {
+		const position = url.lastIndexOf('.')
+		if (position === -1) return ''
+		const extension = url.slice(position)
+		const thumbnailSp = url.slice(0, position)
+		return thumbnailSp + '_sp' + extension
+	}
   return (
-    <section className="section section--gradient">
-      <div className="container">
-        <div className="columns">
-          <div className="column is-10 is-offset-1">
-            <div className="section">
-              <h2 className="title is-size-3 has-text-weight-bold is-bold-light">
-                {title}
-              </h2>
-              <div
-                className="content"
-                dangerouslySetInnerHTML={{ __html: content }}
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+		<article className="page">
+			<figure className="page-thumbnail">
+				<img className="page-thumbnail-pc" src={thumbnail} alt={title} title={title}/>
+				<img className="page-thumbnail-sp" src={returnSpThumbnail(thumbnail)} alt={title} title={title}/>
+			</figure>
+			<section className="page-container container section">
+				<h2 className="page-container-title title">
+					{title}
+				</h2>
+				<p className="page-container-date">{date}</p>
+				<div
+					className="page-container-content content"
+					dangerouslySetInnerHTML={{ __html: content }}
+				/>
+			</section>
+		</article>
   )
 }
 
 PageTemplate.propTypes = {
   title: PropTypes.string.isRequired,
   content: PropTypes.string,
+	date: PropTypes.string,
+	thumbnail: PropTypes.string,
 }
 
 const Page = ({ data }) => {
@@ -35,7 +44,12 @@ const Page = ({ data }) => {
 
   return (
     <Layout>
-      <PageTemplate title={page.title} content={page.content} />
+      <PageTemplate
+				title={page.title}
+				content={page.content}
+				date={page.date}
+				thumbnail={page.featured_media.source_url}
+			/>
     </Layout>
   )
 }
@@ -52,6 +66,10 @@ export const pageQuery = graphql`
       title
 			content
 			slug
+			date(formatString: "MMMM D, Y")
+			featured_media {
+				source_url
+			}
     }
   }
 `
