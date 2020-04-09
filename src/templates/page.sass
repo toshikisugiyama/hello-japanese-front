@@ -1,0 +1,17 @@
+.page
+	.page-thumbnail
+		display: flex
+		justify-content: center
+		.page-thumbnail-pc
+			display: block
+			@media screen and (max-width: 600px)
+				display: none
+		.page-thumbnail-sp
+			display: none
+			@media screen and (max-width: 600px)
+				display: block
+	.page-container
+		.page-container-title
+		.page-container-date
+			text-align: right
+		.page-container-content
