@@ -3,66 +3,64 @@ import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { graphql, Link } from 'gatsby'
 import Layout from '../components/Layout'
+import './post.sass'
 
 export const BlogPostTemplate = ({
   content,
   categories,
-  tags,
   title,
-  date,
+	date,
+	thumbnail,
   author,
 }) => {
+	const returnSpThumbnail = (url) => {
+		const position = url.lastIndexOf('.')
+		if (position === -1) return ''
+		const extension = url.slice(position)
+		const thumbnailSp = url.slice(0, position)
+		return thumbnailSp + '_sp' + extension
+	}
   return (
-    <section className="section">
-      <div className="container content">
-        <div className="columns">
-          <div className="column is-10 is-offset-1">
-            <h1 className="title is-size-2 has-text-weight-bold is-bold-light">
-              {title}
-            </h1>
-            <div dangerouslySetInnerHTML={{ __html: content }} />
-            <div style={{ marginTop: `4rem` }}>
-              <p>
-                {date} - posted by{' '}
-                <Link to={`/author/${author.slug}`}>{author.name}</Link>
-              </p>
-              {categories && categories.length ? (
-                <div>
-                  <h4>Categories</h4>
-                  <ul className="taglist">
-                    {categories.map(category => (
-                      <li key={`${category.slug}cat`}>
-                        <Link to={`/categories/${category.slug}/`}>
-                          {category.name}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ) : null}
-              {tags && tags.length ? (
-                <div>
-                  <h4>Tags</h4>
-                  <ul className="taglist">
-                    {tags.map(tag => (
-                      <li key={`${tag.slug}tag`}>
-                        <Link to={`/tags/${tag.slug}/`}>{tag.name}</Link>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ) : null}
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    <article className="post">
+			<figure className="post-thumbnail">
+				<img className="post-thumbnail-pc" src={thumbnail} alt={title} title={title}/>
+				<img className="post-thumbnail-sp" src={returnSpThumbnail(thumbnail)} alt={title} title={title}/>
+			</figure>
+      <section className="post-container container section">
+				<div className="post-container-category">
+					{categories && categories.length ? (
+						<ul className="post-container-category-list">
+							{categories.map(category => (
+								<li key={`${category.slug}cat`} className="post-container-category-list-item">
+									<Link to={`/categories/${category.slug}/`}>
+										{category.name}
+									</Link>
+								</li>
+							))}
+						</ul>
+					) : null}
+				</div>
+				<h1 className="post-container-title title">
+					{title}
+				</h1>
+				<p className="post-container-date">{date}</p>
+				<div
+					className="post-container-content content"
+					dangerouslySetInnerHTML={{ __html: content }}
+				/>
+				<p className="post-container-author">
+					posted by{' '}
+					<Link to={`/author/${author.slug}`}>{author.name}</Link>
+				</p>
+      </section>
+    </article>
   )
 }
 
 BlogPostTemplate.propTypes = {
   content: PropTypes.node.isRequired,
-  title: PropTypes.string,
+	title: PropTypes.string,
+	thumbnail: PropTypes.string,
 }
 
 const BlogPost = ({ data }) => {
@@ -74,9 +72,9 @@ const BlogPost = ({ data }) => {
       <BlogPostTemplate
         content={post.content}
         categories={post.categories}
-        tags={post.tags}
         title={post.title}
-        date={post.date}
+				date={post.date}
+				thumbnail={post.featured_media.source_url}
         author={post.author}
       />
     </Layout>
@@ -105,12 +103,11 @@ export const pageQuery = graphql`
       title
       slug
       content
-      date(formatString: "MMMM DD, YYYY")
+			date(formatString: "MMMM D, YYYY")
+			featured_media {
+				source_url
+			}
       categories {
-        name
-        slug
-      }
-      tags {
         name
         slug
       }
