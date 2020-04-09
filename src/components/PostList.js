@@ -3,15 +3,23 @@ import PropTypes from 'prop-types'
 import { Link, graphql } from 'gatsby'
 import './PostList.sass'
 
+const url = 'https://hello-japanese.s3.ap-northeast-1.amazonaws.com/2020/04/HelloJapanese2.png'
+const returnSpThumbnail = (url) => {
+	const position = url.lastIndexOf('.')
+	if (position === -1) return ''
+	const extension = url.slice(position)
+	const thumbnailSp = url.slice(0, position)
+	return thumbnailSp + '_sp' + extension
+}
 export default class IndexPage extends React.Component {
-  render() {
-    const { posts, title } = this.props
+	render() {
+		const { posts, title } = this.props
 
     return (
 			<>
 				<figure>
-					<img className="img-pc" src="https://hello-japanese.net/wp-content/uploads/2018/10/HelloJapanese2.jpg" alt="image"/>
-					<img className="img-sp" src="https://hello-japanese.net/wp-content/themes/hello-japanese-sp/img/HelloJapanese2_sp.jpg" alt="image"/>
+					<img className="img-pc" src={url} alt="image"/>
+					<img className="img-sp" src={returnSpThumbnail(url)} alt="image"/>
 				</figure>
 				<section className="section">
 					<div className="container">
@@ -26,7 +34,7 @@ export default class IndexPage extends React.Component {
 								>
 									<Link className="article" to={post.slug}>
 										<figure>
-											<img src="https://hello-japanese.net/wp-content/uploads/2018/10/HelloJapanese2.jpg" alt="image"/>
+											<img src={url} alt="image"/>
 										</figure>
 										<div className="article-text">
 											<h3 className="article-text-title">{post.title}</h3>
