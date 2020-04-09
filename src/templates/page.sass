@@ -2,16 +2,25 @@
 	.page-thumbnail
 		display: flex
 		justify-content: center
-		.page-thumbnail-pc
+		img
+			height: auto
+			max-width: 100%
+		img.page-thumbnail-pc
 			display: block
 			@media screen and (max-width: 600px)
 				display: none
-		.page-thumbnail-sp
+		img.page-thumbnail-sp
 			display: none
 			@media screen and (max-width: 600px)
 				display: block
 	.page-container
 		.page-container-title
+			text-align: center
 		.page-container-date
 			text-align: right
+			margin-bottom: 40px
 		.page-container-content
+			figure.wp-block-image
+				@media screen and (max-width: 600px)
+					margin-right: 0
+					margin-left: 0
