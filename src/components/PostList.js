@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Link, graphql } from 'gatsby'
 import './PostList.sass'
 
-const url = 'https://hello-japanese.s3.ap-northeast-1.amazonaws.com/2020/04/HelloJapanese2.png'
+const url = 'https://hello-japanese.s3.ap-northeast-1.amazonaws.com/2020/04/HelloJapanese1.png'
 const returnSpThumbnail = (url) => {
 	const position = url.lastIndexOf('.')
 	if (position === -1) return ''
@@ -34,7 +34,7 @@ export default class IndexPage extends React.Component {
 								>
 									<Link className="article" to={post.slug}>
 										<figure>
-											<img src={url} alt="image"/>
+											<img src={post.featured_media.source_url} alt={post.title} title={post.title}/>
 										</figure>
 										<div className="article-text">
 											<h3 className="article-text-title">{post.title}</h3>
@@ -55,7 +55,7 @@ export default class IndexPage extends React.Component {
 
 IndexPage.propTypes = {
   posts: PropTypes.arrayOf(PropTypes.object),
-  title: PropTypes.string,
+	title: PropTypes.string,
 }
 
 export const pageQuery = graphql`
@@ -71,6 +71,9 @@ export const pageQuery = graphql`
       }
     }
     date(formatString: "MMMM DD, YYYY")
-    slug
+		slug
+		featured_media {
+      source_url
+    }
   }
 `
