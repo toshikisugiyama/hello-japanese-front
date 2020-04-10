@@ -11,6 +11,24 @@ const returnSpThumbnail = (url) => {
 	const thumbnailSp = url.slice(0, position)
 	return thumbnailSp + '_sp' + extension
 }
+const initialToUpperCase = (str) => {
+	return str.charAt(0).toUpperCase() + str.slice(1)
+}
+const showDate = (date) => {
+	const target = 'May'
+	date = initialToUpperCase(date)
+	const hasTarget = date.includes(target)
+	if (hasTarget) {
+		const dot = date.indexOf('.')
+		if (dot === -1) {
+			return date
+		}
+		const month = date.slice(0, dot)
+		const dayYear = date.slice(dot + 1)
+		return month + dayYear
+	}
+	return date
+}
 export default class IndexPage extends React.Component {
 	render() {
 		const { posts, title } = this.props
@@ -39,7 +57,7 @@ export default class IndexPage extends React.Component {
 										<div className="article-text">
 											<h3 className="article-text-title">{post.title}</h3>
 											<p className="article-text-date">
-												{post.date}
+												{showDate(post.date)}
 											</p>
 										</div>
 									</Link>
@@ -70,7 +88,7 @@ export const pageQuery = graphql`
         wordpress_48
       }
     }
-    date(formatString: "MMMM DD, YYYY")
+    date(formatString: "MMM. D, YYYY")
 		slug
 		featured_media {
       source_url
