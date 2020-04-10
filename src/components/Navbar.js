@@ -2,7 +2,7 @@ import React from 'react'
 import { Link, StaticQuery, graphql } from 'gatsby'
 import './Navbar.sass'
 
-const showFirstLetterUpperCase = (str) => {
+const initialToUpperCase = (str) => {
 	return str.charAt(0).toUpperCase() + str.slice(1)
 }
 const Navbar = () => (
@@ -35,7 +35,7 @@ const Navbar = () => (
 									to={edge.node.slug}
 									key={edge.node.slug}
 								>
-									{showFirstLetterUpperCase(edge.node.slug)}
+									{initialToUpperCase(edge.node.slug)}
 								</Link>
 							))}
 						</div>
