@@ -1,3 +1,6 @@
+
+<a href="https://gyazo.com/e2fd8a153c212f231a5a6524ef9b5fad"><img src="https://i.gyazo.com/e2fd8a153c212f231a5a6524ef9b5fad.png" alt="structure of hello hapanese" width="1377"/></a>
+
 # Gatsby v2 WordPress Starter
 
 This starter is forked from the
