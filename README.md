@@ -1,5 +1,5 @@
 
-<a href="https://i.gyazo.com/e2fd8a153c212f231a5a6524ef9b5fad.png"><img src="https://i.gyazo.com/e2fd8a153c212f231a5a6524ef9b5fad.png" alt="structure of hello hapanese" width="1377"/></a>
+[![Image from Gyazo](https://i.gyazo.com/ddb9104e2bc8eb3beb07f7b4ad13db0b.png)](https://i.gyazo.com/b04d89d1a2928c7bdb22436c27953e28.png)
 
 # Gatsby v2 WordPress Starter
 
